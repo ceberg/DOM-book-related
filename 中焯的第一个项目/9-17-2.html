@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="index.css" type="text/css" />
+</head>
+<body class="bg_index" >
+	<div id="content">
+		
+	</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajax({
+			url: '/reqxml',
+			type: 'post',
+			data: {
+				action:'46101',
+				menu_id:'20001',
+				stockCode:'600600',
+				npage:'1',
+				maxcount:'5',
+				ReqLinkType:'2'
+			},
+			error: function(){alert("请求数据时，出现错误！")},
+			success: function(data){
+				var news = data.GRID0;
+				var html = "";
+				html += '<ul class="tt">';
+				for (var i=0; i< news.length; i++) {
+					var item = news[i].split("|");
+					var lhref="http://127.0.0.1:81/Ajax-jq/%E6%96%B0%E9%97%BB%E9%A1%B5.html"+"?id="+item[0];
+					var mystr=item[2].substring(5,10);					
+						html += '<li>';
+						html += '<a href="'+lhref+'">';
+						//非常重要引入数字的格式
+						html += '<p class="news_txt">'+'<span class="time">'+item[1]+'</span>';
+						html += mystr+'</p>';
+						html += '</a></li>';	
+						// alert(item[0]);
+						// console.log(lhref);
+				};
+					html += '</ul>';
+					$("#content").append(html);	
+					// $(".tt li a:eq(2)").attr("href","http://127.0.0.1:81/Ajax-jq/%E6%96%B0%E9%97%BB%E9%A1%B5.html");
+			}
+
+		})
+		
+	});
+	
+</script>
+</body>
+</html>              

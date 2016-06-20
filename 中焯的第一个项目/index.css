@@ -1,0 +1,12 @@
+		*{margin:0;padding: 0px;}
+		body{background: #2a2a2a;}
+		ul{list-style: none;}
+		li{border-top: 1px solid #fff;padding: 14px 8px;}
+		.time{ display: block;float:right;}
+		a{text-decoration: none;color:#fff;font-size: 12px;line-height: 12px;}
+		.news_txt{text-align: right;}
+		.time{float:left;text-align: left;    text-overflow:ellipsis; 
+    overflow:hidden; 
+    white-space:nowrap; 
+    width:265px; 
+   }

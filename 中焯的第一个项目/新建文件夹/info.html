@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+</head>
+<body class="bg_index" id="info" >
+	<h2 class="title"></h2>
+	<h4 class="time"></h4>
+	<div class="content"></div>
+</body>
+<script type="text/javascript">
+	function GetRequest() { 
+		var url = location.search; //获取url中"?"符后的字串 
+		var theRequest = new Object(); 
+		if (url.indexOf("?") != -1) { 
+		var str = url.substr(1); 
+		strs = str.split("&"); 
+		for(var i = 0; i < strs.length; i ++) { 
+		theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+		} 
+		} 
+		return theRequest; 
+	}
+	var Request = GetRequest(); 
+	console.log(Request.id);
+
+	$(document).ready(function() {
+		$.ajax({
+			url: '/reqxml',
+			type: 'post',
+			data: {
+				action:'46102',
+				menu_id:'20001',
+				id: Request.id,
+				stockCode:'600600',
+				ReqLinkType:'2'
+			},
+			error: function(){alert("请求数据时，出现错误！")},
+			success: function(data){
+				var oData = data.GRID0;
+				var content = '';
+				for (var i = 0; i < oData.length; i++) {
+					content += '<p>'+oData[i]+'</p>';
+				};
+				$(".title").html(data.TITLE);
+				$(".time").html(data.TIME);
+				$(".content").html(content);
+			}
+
+		})
+		
+	});
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" href="index.css" type="text/css" />
+	<style>
+		#content{color:white;}
+	</style>
+</head>
+<body class="bg_index" >
+	<div id="content">5566</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$.ajax({
+			type:"post",
+			url:'/reqxml',
+			data:{
+				'action':'46101',
+				'menu_id':'20001',
+				'stockCode':'600600',
+				'npage':'1',
+				'maxcount':'5',
+				'ReqLinkType':'2'
+			},
+			error:function(){alert("失败");},
+			success:function(data){
+				
+				var news=data.GRID0;
+				document.write(news[0]);
+				
+				// var items=news[0].split("|");
+				// for(var i=0;i<items.length;i++){
+				// 	document.write(items[i]+"<br/>");
+				// }
+				
+			}
+		});
+	});
+</script>
+</body>
+</html>              
